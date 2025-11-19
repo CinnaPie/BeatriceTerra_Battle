@@ -1,0 +1,234 @@
+/* --- 기본 설정 --- */
+body {
+    background-color: #2c3e50;
+    font-family: 'Malgun Gothic', sans-serif;
+    
+    /* 화면 전체를 덮도록 설정 */
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden; 
+    
+    /* 콘텐츠를 화면의 정중앙에 배치 (핵심) */
+    display: flex;
+    justify-content: center; /* 가로 중앙 정렬 */
+    align-items: center;   /* 세로 중앙 정렬 */
+    padding: 0;
+}
+
+.game-container {
+    background-color: white;
+    
+    /* 너비를 950px 고정 대신 창 크기의 80%를 차지하도록 늘림 */
+    width: 95%; 
+    /* 너무 커지는 것을 막기 위한 최대 너비 설정 */
+    max-width: 95%;
+    
+    max-height: 95vh;
+    padding: 20px; 
+    border-radius: 15px; 
+    box-shadow: 0 0 25px rgba(0,0,0,0.5); 
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* --- 상단 UI (캐릭터 시트) --- */
+.battle-ui-top {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    flex-shrink: 0; /* 크기가 줄어들지 않도록 고정 */
+}
+
+.char-sheet {
+    width: 48%; 
+    border: 3px solid #34495e;
+    padding: 10px;
+    padding-top: 50px; /* HP바와 이름이 들어갈 공간 확보 */
+    border-radius: 10px;
+    background-color: #f8f9fa;
+    position: relative; 
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+}
+
+/* 이름과 HP 바를 묶은 그룹 (코너 배치 유지) */
+.header-corner-group {
+    /* ... 기존 스타일 유지 ... */
+    /* width: 100%; 제거 (이름이 밖으로 나가야 하므로) */
+    /* position: relative;로 변경하여 이름의 absolute 기준점이 되도록 설정 */
+    position: relative; 
+    /* padding을 줄여서 이름이 덜 튀어나오게 합니다 */
+    padding: 5px; 
+    background-color: #34495e;
+    color: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+/* 이름 스타일 (체력 바 위에 띄움) */
+.char-name-display {
+    font-size: 1.2em;
+    margin: 0; /* 마진 제거 */
+    white-space: nowrap;
+    
+    /* 이름을 체력 바 그룹 코너 위로 띄움 */
+    position: absolute;
+    top: -30px; /* 위로 띄우는 정도 */
+    padding: 2px 5px;
+    background-color: #34495e; /* 이름 배경색 추가 */
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+
+/* 왼쪽 캐릭터 이름: 좌상단 코너 위에 위치 */
+.char-sheet.char-left .position-absolute-name {
+    left: 0;
+    transform: none;
+}
+
+/* 오른쪽 캐릭터 이름: 우상단 코너 위에 위치 */
+.char-sheet.char-right .position-absolute-name {
+    right: 0;
+    transform: none;
+}
+
+/* HP 바 컨테이너 (이름이 띄워진 공간을 고려하여 마진 조정) */
+.hp-bar-container {
+    flex-grow: 1; 
+    height: 25px;
+    background-color: #e0e0e0;
+    border-radius: 12px;
+    border: 1px solid #000;
+    /* 이름을 띄웠으므로 좌우 마진을 늘려 공간을 확보 */
+    margin: 0 10px; 
+    position: relative;
+    overflow: hidden;
+}
+
+.hp-bar-fill {
+    height: 100%;
+    background-color: #e74c3c;
+    transition: width 0.3s ease;
+}
+
+.hp-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: bold;
+    color: white;
+    text-shadow: 1px 1px 2px #000;
+}
+
+/* --- 능력치 표기 스타일 (수정) --- */
+.stats-group {
+    /* 토글 제거에 따라 스타일 간결화 */
+    background-color: #ecf0f1; /* 배경색으로 구분 */
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 0.95em;
+    margin: 10px 0 15px 0; /* 스킬 목록과의 간격 확보 */
+    text-align: center;
+    border: 1px dashed #ccc;
+}
+.stats-group p {
+    margin: 0;
+    font-weight: bold;
+    color: #333;
+}
+
+/* --- 스킬 목록 스타일 --- */
+.skill-list-container {
+    text-align: center;
+    padding-top: 5px;
+    border-top: 1px solid #ccc; /* 능력치와 스킬 목록 구분선 */
+}
+
+.skill-list h4 { margin-top: 5px; margin-bottom: 5px;}
+
+.skill-btn {
+    padding: 8px 12px;
+    margin: 5px 3px;
+    border: none; /* 테두리 제거 */
+    background-color: #3498db;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.2s;
+}
+
+.skill-btn:hover {
+    background-color: #2980b9;
+}
+
+.skill-btn.disabled {
+    background-color: #95a5a6;
+    cursor: not-allowed;
+}
+
+
+/* --- 전투 필드 (수정됨) --- */
+.battle-field-container {
+    /* 기존 배경/패딩/그림자 제거하여 흰색 바탕에 스며들도록 처리 */
+    background-color: transparent; 
+    padding: 0; 
+    border-radius: 0;
+    box-shadow: none;
+    
+    width: 100%;
+    text-align: center;
+    
+    /* 상단 캐릭터 UI와 필드 사이의 여백을 늘립니다. */
+    margin-top: 40px; 
+
+    flex-grow: 1; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+}
+
+.battle-grid {
+    width: 90%; 
+    max-width: 800px;
+    border-collapse: collapse;
+    table-layout: fixed;
+    /* 필드 상하 여백을 확보합니다. */
+    margin: 20px auto; 
+}
+
+.battle-grid td {
+    border: 2px solid #555;
+    /* 높이를 80px에서 100px로 증가시켜 넉넉하게 만듭니다. */
+    height: 100px; 
+    text-align: center;
+    vertical-align: middle;
+    background-color: #fcfcfc;
+    font-size: 1.2em; /* 폰트 크기도 약간 키웁니다. */
+    font-weight: 500;
+}
+
+.char-seriel {
+    color: black;
+    font-weight: bold;
+}
+
+.char-iris {
+    color: black;
+    font-weight: bold;
+}
+
+.end-battle-btn {
+    background-color: #e67e22;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    color: white;
+    margin-top: 10px;
+    align-self: center; /* 버튼을 중앙에 배치 */
+}

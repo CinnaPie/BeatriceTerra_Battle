@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>턴제 배틀 시스템 - 전투 화면</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="game-container">
+        
+        <div class="battle-ui-top">
+            
+            <div class="char-sheet char-left">
+                <div class="header-corner-group">
+                    <h2 class="char-name-display position-absolute-name">세리엘</h2>
+                    
+                    <div class="hp-bar-container">
+                        <div class="hp-bar-fill" style="width: 80%;"></div>
+                        <span class="hp-text">80 / 100</span>
+                    </div>
+                </div>
+                
+                <div class="stats-group">
+                    <p>물속성 [체력 100 / 공격 15 / 마나 50 / 방어 5 / 속성 7 / 신앙 0]</p>
+                </div>
+                
+                <div class="skill-list-container">
+                    <h4>보유 스킬</h4>
+                    <div class="skill-list">
+                        <button class="skill-btn">물결 치기</button>
+                        <button class="skill-btn disabled">방패 올리기</button>
+                        <button class="skill-btn">정화</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="char-sheet char-right">
+                <div class="header-corner-group">
+                    <div class="hp-bar-container">
+                        <div class="hp-bar-fill" style="width: 100%;"></div>
+                        <span class="hp-text">100 / 100</span>
+                    </div>
+                    <h2 class="char-name-display position-absolute-name">아이리스</h2>
+                </div>
+                
+                <div class="stats-group">
+                    <p>불속성 [체력 100 / 공격 12 / 마나 50 / 방어 8 / 속성 5 / 신앙 15]</p>
+                </div>
+                
+                <div class="skill-list-container">
+                    <h4>보유 스킬</h4>
+                    <div class="skill-list">
+                        <button class="skill-btn">불꽃 발사</button>
+                        <button class="skill-btn">치유의 빛</button>
+                        <button class="skill-btn disabled">도주</button>
+                    </div>
+                </div>
+            </div>
+
+        </div> <div class="battle-field-container">
+            <h3>전투 필드 (15칸)</h3>
+            <table class="battle-grid">
+                <tr>
+                    <td></td> <td></td> <td></td> <td></td> <td></td>
+                    <td class="char-seriel">세리엘</td>
+                    <td></td> <td></td> <td></td>
+                    <td class="char-iris">아이리스</td>
+                    <td></td> <td></td> <td></td> <td></td> <td></td>
+                </tr>
+            </table>
+            <button class="end-battle-btn">전투 중단</button>
+        </div>
+
+    </div> </body>
+</html>
